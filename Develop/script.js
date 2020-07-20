@@ -1,15 +1,12 @@
-// Assignment Code
+// Variables
 var showDebugMessages = true;
 var generateBtn = document.querySelector("#generate");
 var lengthOfPassword = 8;
-//lowercase, uppercase, numeric, and/or special characters (choose which criteria)
 var useLowercase = false;
 var useUppercase = false;
 var useNumeric = false;
 var useSpecial = false;
 var validPasswordValues = [];
-
-
 
 // Write password to the #password input
 function writePassword() {
@@ -21,15 +18,16 @@ function writePassword() {
     {
       return;
     }
+    //alerting the password
     BuildValidPasswordValues();
-   var password = generatePassword();
-   alert(password);
-
-  // var passwordText = document.querySelector("#password");
-
-  // passwordText.value = password;
-
+    var password = generatePassword();
+    alert(password);
+    //printing the password in the box
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
 }
+
+// generating a password using loops with the math.floor and math.random
 function generatePassword() 
 {
   var password = "";
@@ -41,7 +39,8 @@ function generatePassword()
   return password;
 }
 
-function BuildValidPasswordValues()
+// using ANCII code insted of creating an array for each text element
+function BuildValidPasswordValues() 
 {
   validPasswordValues = [];
   if (useLowercase)
@@ -62,6 +61,7 @@ function BuildValidPasswordValues()
   }
 }
 
+//This creates the Password
 function AddPasswordValues(start, end)
 {
   for(var i = start; i <= end; i++)
@@ -70,11 +70,12 @@ function AddPasswordValues(start, end)
   }
 }
 
-//Length of Password
+//Length of Password, the 8 is the initial number showing up in the box
 function getLengthOfPassword()
 {
-  lengthOfPassword = prompt("Choose a length of at least 8 characters and no more than 128 characters", "8");
+  lengthOfPassword = prompt("Choose a length of at least 8 characters and no more than 128 characters: (Answer must be an Integer)", "8");
   lengthOfPassword = parseInt(lengthOfPassword);
+  //Wrong answers
   if (isNaN(lengthOfPassword))
   { 
     alert ("User didn't supply a valid password length");
@@ -85,7 +86,7 @@ function getLengthOfPassword()
     alert("I said between 8 and 128!!!");
     return false;
   }
-  // debug messages
+  //Right Answer
   if (showDebugMessages)
   {
   alert("You password is going to be " + lengthOfPassword + " characters.");
@@ -103,7 +104,7 @@ function getCharacterTypes()
   useNumeric = confirm("Do you want to use Numeric Characters?");
 
   useSpecial = confirm("Do you want to use Special Characters?");
-
+//If the user didnt choose any of the options. Send user back to the start.
   if (!useLowercase && !useUppercase && !useNumeric && !useSpecial)
   {
     alert ("You need to pick at least one character type");
@@ -137,5 +138,5 @@ function getCharacterTypes()
   return true;
 }
 
-
+//btn
 generateBtn.addEventListener("click", writePassword);
